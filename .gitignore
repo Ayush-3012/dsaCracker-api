@@ -1,3 +1,5 @@
 /node_modules
 .env
-# questions.js
+
+/src/data/loveBabbar.Questions.js
+/src/data/shradhaDi.Questions.js
