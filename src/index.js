@@ -21,7 +21,7 @@ connectDB()
   })
   .catch((err) => console.log("MongoDb Connection failed: ", err));
 
-// import loveBabbarRouter from "./routes/loveBabbar.routes.js";
+import loveBabbarRouter from "./routes/loveBabbar.routes.js";
 // import shradhaDiRouter from "./routes/shradhaDi.routes.js";
 
 // app.use("/api/v1/loveBabbarQuestions", loveBabbarRouter);
