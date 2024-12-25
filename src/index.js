@@ -12,18 +12,14 @@ app.use(express.json());
 
 app.get("/", (req, res) => res.send("Hello, Welcome!"));
 
-app.listen(process.env.PORT, () => {
-  console.log(` Server is listening to port ${process.env.PORT}`);
-});
-
-connectDB();
-//   .then(() => {
-//     // seedData();
-//     app.listen(process.env.PORT, () => {
-//       console.log(` Server is listening to port ${process.env.PORT}`);
-//     });
-//   })
-//   .catch((err) => console.log("MongoDb Connection failed: ", err));
+connectDB()
+  .then(() => {
+    // seedData();
+    app.listen(process.env.PORT, () => {
+      console.log(` Server is listening to port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => console.log("MongoDb Connection failed: ", err));
 
 // import loveBabbarRouter from "./routes/loveBabbar.routes.js";
 // import shradhaDiRouter from "./routes/shradhaDi.routes.js";
