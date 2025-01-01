@@ -25,4 +25,4 @@ import loveBabbarRouter from "./routes/loveBabbar.routes.js";
 import shradhaDiRouter from "./routes/shradhaDi.routes.js";
 
 app.use("/api/v1/loveBabbarQuestions", loveBabbarRouter);
-app.use("/api/v1/shrdhaDiQuestions", shradhaDiRouter);
+app.use("/api/v1/shradhaDiQuestions", shradhaDiRouter);
