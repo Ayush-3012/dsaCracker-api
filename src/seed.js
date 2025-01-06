@@ -52,31 +52,6 @@ export const seedData = async () => {
 
     const insertedTopics = await Topic.insertMany(allTopics);
 
-    // const allQuestions = [];
-    // sheetsData.forEach((sheet) => {
-    //   insertedTopics.forEach((topic) => {
-    //     sheet.topics.map((eachTopic) => {
-    //       eachTopic.questions.map((question) => {
-    //         if (
-    //           !allQuestions.some(
-    //             (existingQuestion) => existingQuestion.URL === question.URL
-    //           )
-    //         ) {
-    //           allQuestions.push({
-    //             topicId: topic._id,
-    //             Topic: topic.name,
-    //             Problem: question.Problem,
-    //             URL: question.URL,
-    //             URL2: question.URL2,
-    //           });
-    //         }
-    //       });
-    //     });
-    //   });
-    // });
-
-    // await Question.insertMany(allQuestions);
-
     const allQuestions = [];
     sheetsData.forEach((sheet) => {
       const sheetTopics = sheet.topics;
