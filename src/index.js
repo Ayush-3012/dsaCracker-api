@@ -14,17 +14,13 @@ app.get("/", (req, res) => res.send("Hello, Welcome!"));
 
 connectDB()
   .then(() => {
-    // seedData();
+    seedData();
     app.listen(process.env.PORT, () => {
       console.log(` Server is listening to port ${process.env.PORT}`);
     });
   })
   .catch((err) => console.log("MongoDb Connection failed: ", err));
 
-import sheetRouter from "./routes/sheet.routes.js";
-import topicRouter from "./routes/topic.routes.js";
-import questionRouter from "./routes/question.routes.js";
+import apiRouter from "./routes/main.routes.js";
 
-app.use("/api/v1/sheets", sheetRouter);
-app.use("/api/v1/topics", topicRouter);
-app.use("/api/v1/questions", questionRouter);
+app.use("/api/v1", apiRouter);

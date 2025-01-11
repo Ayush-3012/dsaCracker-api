@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
+  sheetId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Sheet", 
+    required: true,
+  },
   topicId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Topic",

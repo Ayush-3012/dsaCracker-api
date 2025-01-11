@@ -25,7 +25,7 @@ export const seedData = async () => {
       },
     ];
 
-    const sheets = await Sheet.insertMany(
+    const allSheets = await Sheet.insertMany(
       sheetsData.map((sheet) => ({
         name: sheet.name,
         description: sheet.description,
@@ -34,47 +34,37 @@ export const seedData = async () => {
     );
 
     const allTopics = [];
-    sheets.forEach((sheet, index) => {
+    allSheets.forEach((sheet, index) => {
       sheetsData[index].topics.map((topic) => {
-        if (
-          !allTopics.some(
-            (existingTopic) => existingTopic.name === topic.topicName
-          )
-        ) {
-          allTopics.push({
-            sheetId: sheet._id,
-            name: topic.topicName,
-            description: topic.description,
-          });
-        }
+        allTopics.push({
+          sheetId: sheet._id,
+          name: topic.topicName,
+          description: topic.description,
+        });
       });
     });
-
     const insertedTopics = await Topic.insertMany(allTopics);
 
     const allQuestions = [];
-    sheetsData.forEach((sheet) => {
-      const sheetTopics = sheet.topics;
-      sheetTopics.forEach((eachTopic) => {
+    sheetsData.forEach((sheet, sheetIndex) => {
+      const currentSheet = allSheets[sheetIndex];
+      sheet.topics.forEach((eachTopic) => {
         const matchedTopic = insertedTopics.find(
-          (topic) => topic.name === eachTopic.topicName
+          (topic) =>
+            topic.name === eachTopic.topicName &&
+            topic.sheetId.toString() === currentSheet._id.toString()
         );
 
         if (matchedTopic) {
           eachTopic.questions.forEach((question) => {
-            if (
-              !allQuestions.some(
-                (existingQuestion) => existingQuestion.URL === question.URL
-              )
-            ) {
-              allQuestions.push({
-                topicId: matchedTopic._id,
-                Topic: matchedTopic.name,
-                Problem: question.Problem,
-                URL: question.URL,
-                URL2: question.URL2,
-              });
-            }
+            allQuestions.push({
+              sheetId: currentSheet._id,
+              topicId: matchedTopic._id,
+              Topic: matchedTopic.name,
+              Problem: question.Problem,
+              URL: question.URL,
+              URL2: question.URL2,
+            });
           });
         }
       });
