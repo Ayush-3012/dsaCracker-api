@@ -14,7 +14,7 @@ app.get("/", (req, res) => res.send("Hello, Welcome!"));
 
 connectDB()
   .then(() => {
-    seedData();
+    // seedData();
     app.listen(process.env.PORT, () => {
       console.log(` Server is listening to port ${process.env.PORT}`);
     });
